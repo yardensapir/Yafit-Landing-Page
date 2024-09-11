@@ -11,7 +11,7 @@ const About = (props: Props) => {
                 <div className="grid lg:grid-cols-2 gap-8 items-center">
 
                     <div className="lg:order-2">
-                    <Lottie animationData={animationData} loop={true} />
+                        <Lottie animationData={animationData} loop={true} />
                     </div>
 
                     <div className="text-right">
@@ -22,13 +22,12 @@ const About = (props: Props) => {
                             יפית היא דיאטנית קלינית מוסמכת עם ניסיון רב, המציעה שירותי ייעוץ תזונתי מותאמים אישית בתל אביב. בהכוונה המקצועית שלה, תוכלו לבצע בחירות תזונתיות נכונות ולהגיע ליעדי הבריאות שלכם. סמכו על יפית לייעוץ תזונתי מדויק ויעיל, המבוסס על שנים של ניסיון וידע מעמיק.
                         </p>
                     </div>
-
                 </div>
             </div>
             <div className="absolute bottom-0 left-0 w-full h-20 bg-white transform skew-y-6"></div>
 
 
-            
+
         </section>
 
 

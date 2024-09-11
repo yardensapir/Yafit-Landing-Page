@@ -2,42 +2,43 @@
 type Props = {};
 const Hero = (props: Props) => {
   return (
-<section className="relative bg-orange-50 h-screen overflow-hidden">
+    <section className="relative bg-orange-50 h-screen overflow-hidden">
 
-  <video
-    autoPlay
-    loop
-    muted
-    className="absolute inset-0 w-full h-full object-cover"
-  >
-    <source src="/bg-video.mp4" type="video/mp4" />
-    Your browser does not support the video tag.
-  </video>
+      <video
+        autoPlay
+        loop
+        muted
+        className="absolute inset-0 w-full h-full object-cover"
+      >
+        <source src="/bg-video.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
 
-  {/* Optional overlay for better text readability */}
-  <div className="absolute inset-0 bg-white opacity-60"></div>
+      {/* Optional overlay for better text readability */}
+      <div className="absolute inset-0 bg-white opacity-60"></div>
 
-  {/* Content */}
-  <div className="relative flex items-center justify-center h-full">
-    <div className="container mx-auto text-center px-6 lg:px-12">
-      <h1 className="text-5xl font-bold text-black lg:text-6xl leading-tight">
-      
-        תוכניות תזונה מותאמות אישית בתל אביב
-      </h1>
-      <p className="mt-4 text-lg text-gray-700">
-      השיגו בריאות מיטבית עם אסטרטגיות תזונה מותאמות אישית בלב תל אביב. קחו את מסע הבריאות שלכם לשלב הבא כבר היום
-      </p>
-      <div className="mt-8">
-        <a
-          href="#"
-          className="px-8 py-4 bg-indigo-600 text-white text-lg font-semibold rounded-full hover:bg-indigo-500 transition duration-300"
-        >
-      התחילו עכשיו
-        </a>
+      {/* Content */}
+      <div className="relative flex items-center justify-center h-full">
+        <div className="container mx-auto text-center px-6 lg:px-12">
+          <h1 className="text-5xl font-bold text-black lg:text-6xl leading-tight">
+
+            תזונה בהתאמה אישית
+          </h1>
+          <p className="mt-4 text-lg text-gray-700">
+            <h2 className=" text-2xl">B.Sc יפית קרופניק - דיאטנית קלינית</h2>
+            השיגו בריאות מיטבית עם אסטרטגיות תזונה מותאמות אישית
+          </p>
+          <div className="mt-8">
+            <a
+              href="#"
+              className="px-8 py-4 bg-indigo-600 text-white text-lg font-semibold rounded-full hover:bg-indigo-500 transition duration-300"
+            >
+              התחילו עכשיו
+            </a>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
   )
 };
