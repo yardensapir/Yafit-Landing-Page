@@ -2,32 +2,81 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+html,
+body,
+#root,
+.app {
+  height: 100%;
+  width: 100%;
+}
+
+body{
+  background-color: #FFF6EA;
+}
+/* Navbar CSS */
+
+.close-menu,
+.open-menu {
+  position: absolute;
+  cursor: pointer;
+  display: none;
+}
+
+.open-menu {
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+}
+
+.close-menu {
+  top: 20px;
+  right: 20px;
+}
+
+#check {
+  display: none;
+}
+
+@media (max-width: 800px) {
+  .menu {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 73%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    right: -100%;
+    z-index: 100;
+    background-color: #C06C84;
+    color: #fff;
+    transition: all 0.5s ease-in-out;
+    text-transform: uppercase;
+    font-size: 24px;
+  }
+
+  .menu li {
+    margin-top: 40px;
+  }
+
+  .menu li a {
+    padding: 10px;
+  }
+
+  .close-menu,
+  .open-menu {
+    display: block;
+  }
+
+  #check:checked ~ .menu {
+    right: 0;
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-}
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-}
