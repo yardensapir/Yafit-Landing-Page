@@ -1,6 +1,6 @@
 'use client'
 
-import animationData from '../../../../public/lotties/avocado_2.json'
+import animationData from '../../../public/lotties/avocado_2.json'
 import Lottie from "lottie-react";
 
 type Props = {};

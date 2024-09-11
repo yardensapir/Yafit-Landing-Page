@@ -1,17 +1,15 @@
+'use client'
+import About from '@/screens/About/About';
+import Hero from '@/screens/Hero/Hero';
 
-import About from "./screens/About/About";
-import Hero from "./screens/Hero/Hero";
-
-
-Hero
 export default function Home() {
 
-
-
   return (
-    <main className="app">
+    <main className='app'>
       <Hero />
-      <About/>
+      <About />
     </main>
+
+
   );
 }
