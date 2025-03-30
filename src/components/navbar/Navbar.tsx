@@ -1,63 +1,139 @@
 'use client'
-import { SelectedPage } from "@/app/types/types";
-import { useEffect, useState } from "react";
-import { Facebook, Instagram } from 'lucide-react';
-
-
+import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { Menu, X, Phone } from 'lucide-react';
 
 const Navbar = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
 
-    const [scrolled, setScrolled] = useState(false);
+  const navLinks = [
+    { name: 'ראשי', path: '/' },
+    { name: 'אודות', path: '/about' },
+    { name: 'תחומי הטיפול', path: '/services' },
+    { name: 'בלוג', path: '/blog' },
+    { name: 'שאלות נפוצות', path: '/faq' },
+    { name: 'יצירת קשר', path: '/contact' },
+  ];
 
+  // Handle scroll event
+  useEffect(() => {
     const handleScroll = () => {
-        if (window.scrollY === 0) {
-            setScrolled(false);  // Transparent when at the top
-        } else {
-            setScrolled(true);  // Add background when scrolled
-        }
+      setIsScrolled(window.scrollY > 20);
     };
 
-    useEffect(() => {
-        window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
-    return (
-        <nav className={`fixed w-full z-20 top-0 left-0 transition duration-500 ${scrolled ? "bg-orange-50 shadow-md" : "bg-transparent"}`}>
-            <ul className="navigation max-w-[90vw] flex justify-between items-center relative mx-auto py-8">
-                <input type="checkbox" id="check" className="hidden" />
+  // Handle mobile menu
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
 
-                <div className="flex items-center">
-                    <div className="social-icons ml-4 flex space-x-2">
-                        <a href="#" className=" hover:text-blue-600 transition duration-300">
-                            <Facebook size={24} />
-                        </a>
-                        <a href="#" className=" hover:text-pink-600 transition duration-300">
-                            <Instagram size={24} />
-                        </a>
-                    </div>
-                </div>
+  // Close mobile menu when path changes
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [pathname]);
 
-                <span className="menu flex [&>li]:px-4 [&>li>a]:text-center [&>li>a]:relative [&>li>a]:transition [&>li>a]:duration-200 [&>li>a]:ease-in-out [&>li>a]:font-medium [&>li>a]:text-lg">
-                    <li><a href="#">יצירת קשר</a></li>
-                    <li><a href="#">שאלות נפוצות</a></li>
-                    <li><a href="#">בלוג</a></li>
-                    <li><a href="#">תחומי הטיפול</a></li>
-                    <li><a href="#">אודות</a></li>
-                    <label htmlFor="check" className="close-menu">X</label>
-                </span>
+  return (
+    <header 
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled ? 'bg-white shadow-md py-3' : 'bg-transparent py-5'
+      }`}
+      dir="rtl"
+    >
+      <div className="container mx-auto px-4">
+        <div className="flex items-center justify-between">
+          {/* Logo */}
+          <Link href="/" className="z-10">
+            <div className={`font-bold text-xl ${isScrolled ? 'text-teal-600' : 'text-teal-600'}`}>
+              יפית קרופניק
+            </div>
+            <div className={`text-xs transition-colors ${isScrolled ? 'text-gray-600' : 'text-gray-700'}`}>
+              דיאטנית קלינית
+            </div>
+          </Link>
 
-                <label htmlFor="check" className="open-menu">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-10 h-10">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-                    </svg>
-                </label>
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center space-x-1 space-x-reverse">
+            {navLinks.map((link) => (
+              <Link
+                key={link.path}
+                href={link.path}
+                className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                  pathname === link.path
+                    ? 'text-teal-600'
+                    : `${isScrolled ? 'text-gray-700' : 'text-gray-800'} hover:text-teal-600`
+                }`}
+              >
+                {link.name}
+              </Link>
+            ))}
+          </nav>
 
-                <a className="logo" href="#">
-                    <h3 className="font-bold text-2xl menu">LOGO</h3>
-                </a>
-            </ul>
-        </nav>
-    )
+          {/* CTA Button (Desktop) */}
+          <div className="hidden md:block">
+            <Link
+              href="tel:+972501234567"
+              className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+                isScrolled
+                  ? 'bg-teal-600 text-white hover:bg-teal-700'
+                  : 'bg-teal-600 text-white hover:bg-teal-700'
+              }`}
+            >
+              <Phone className="w-4 h-4" />
+              050-1234567
+            </Link>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <button
+            className="md:hidden z-10 p-2"
+            onClick={toggleMobileMenu}
+            aria-label="Toggle menu"
+          >
+            {isMobileMenuOpen ? (
+              <X className={`w-6 h-6 ${isScrolled ? 'text-gray-800' : 'text-gray-800'}`} />
+            ) : (
+              <Menu className={`w-6 h-6 ${isScrolled ? 'text-gray-800' : 'text-gray-800'}`} />
+            )}
+          </button>
+
+          {/* Mobile Menu */}
+          <div
+            className={`fixed inset-0 bg-white z-0 transform transition-transform duration-300 ease-in-out ${
+              isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
+            } md:hidden`}
+          >
+            <div className="flex flex-col h-full justify-center items-center space-y-8 pt-16">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.path}
+                  href={link.path}
+                  className={`text-xl font-medium ${
+                    pathname === link.path ? 'text-teal-600' : 'text-gray-800 hover:text-teal-600'
+                  }`}
+                >
+                  {link.name}
+                </Link>
+              ))}
+              
+              <Link
+                href="tel:+972501234567"
+                className="flex items-center gap-2 px-6 py-3 mt-8 bg-teal-600 text-white rounded-full hover:bg-teal-700 transition-colors"
+              >
+                <Phone className="w-5 h-5" />
+                צרו קשר
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+  );
 };
+
 export default Navbar;

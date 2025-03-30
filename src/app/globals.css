@@ -1,82 +1,69 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
+/* Custom Font Import for Hebrew */
+@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-rgb: 255, 255, 255;
 }
 
 html,
-body,
-#root,
-.app {
-  height: 100%;
-  width: 100%;
+body {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  font-family: 'Heebo', sans-serif;
+  color: rgb(var(--foreground-rgb));
+  background: rgb(var(--background-rgb));
 }
 
-body{
-  background-color: #FFF6EA;
+/* RTL specific adjustments */
+[dir="rtl"] {
+  font-family: 'Heebo', sans-serif;
 }
-/* Navbar CSS */
 
-.close-menu,
-.open-menu {
-  position: absolute;
-  cursor: pointer;
+/* Remove default focus outline and add custom one */
+*:focus-visible {
+  outline: 2px solid #0D9488;
+  outline-offset: 2px;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.hide-scrollbar::-webkit-scrollbar {
   display: none;
 }
 
-.open-menu {
-  top: 50%;
-  right: 20px;
-  transform: translateY(-50%);
+/* Hide scrollbar for IE, Edge and Firefox */
+.hide-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
 
-.close-menu {
-  top: 20px;
-  right: 20px;
-}
-
-#check {
-  display: none;
-}
-
-@media (max-width: 800px) {
-  .menu {
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 73%;
-    height: 100vh;
-    position: fixed;
-    top: 0;
-    right: -100%;
-    z-index: 100;
-    background-color: #C06C84;
-    color: #fff;
-    transition: all 0.5s ease-in-out;
-    text-transform: uppercase;
-    font-size: 24px;
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
   }
-
-  .menu li {
-    margin-top: 40px;
-  }
-
-  .menu li a {
-    padding: 10px;
-  }
-
-  .close-menu,
-  .open-menu {
-    display: block;
-  }
-
-  #check:checked ~ .menu {
-    right: 0;
+  to {
+    opacity: 1;
   }
 }
 
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
 
+/* Add some spacing to the content areas to account for fixed navbar */
+main {
+  padding-top: 60px;
+}
+
+/* Custom container widths */
+@media (min-width: 1536px) {
+  .container {
+    max-width: 1280px;
+  }
+}

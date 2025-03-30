@@ -1,77 +1,98 @@
+'use client'
+import React from 'react';
+import { motion } from 'framer-motion';
+import { Calendar, ArrowLeftCircle } from 'lucide-react';
+import Image from 'next/image';
+import yafitImage from '../../../public/assets/Yafit.png'
 
-type Props = {};
-const Hero = (props: Props) => {
+const Hero = () => {
   return (
-    <section className="relative bg-orange-50 h-screen overflow-hidden">
-
-      <video
-        autoPlay
-        loop
-        muted
-        className="absolute inset-0 w-full h-full object-cover"
-      >
-        <source src="/bg-video.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
-
-      {/* Optional overlay for better text readability */}
-      <div className="absolute inset-0 bg-white opacity-60"></div>
-
-      {/* Content */}
-      <div className="relative flex items-center justify-center h-full">
-        <div className="container mx-auto text-center px-6 lg:px-12">
-          <h1 className="text-5xl font-bold text-black lg:text-6xl leading-tight">
-
-            תזונה בהתאמה אישית
-          </h1>
-          <p className="mt-4 text-lg text-gray-700">
-            <h2 className=" text-2xl">B.Sc יפית קרופניק - דיאטנית קלינית</h2>
-            השיגו בריאות מיטבית עם אסטרטגיות תזונה מותאמות אישית
-          </p>
-          <div className="mt-8">
-            <a
-              href="#"
-              className="px-8 py-4 bg-indigo-600 text-white text-lg font-semibold rounded-full hover:bg-indigo-500 transition duration-300"
+    <section className="relative min-h-screen bg-gradient-to-br from-orange-50 to-white" dir="rtl">
+      {/* Decorative Elements */}
+      <div className="absolute top-20 left-20 w-32 h-32 bg-teal-100 rounded-full blur-3xl opacity-20"></div>
+      <div className="absolute bottom-20 right-20 w-32 h-32 bg-teal-100 rounded-full blur-3xl opacity-20"></div>
+      
+      {/* Main Content */}
+      <div className="container mx-auto px-4">
+        <div className="grid lg:grid-cols-2 min-h-screen items-center gap-8 lg:gap-16">
+          {/* Text Content */}
+          <motion.div 
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+            className="space-y-8 lg:pr-8 pt-20 lg:pt-0"
+          >
+            <motion.h1
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.2, duration: 0.8 }}
+              className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight"
             >
-              התחילו עכשיו
-            </a>
-          </div>
+              תזונה בהתאמה <br/> אישית
+            </motion.h1>
+
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.4, duration: 0.8 }}
+              className="space-y-4"
+            >
+              <p className="text-xl sm:text-2xl font-medium text-gray-800">
+                יפית קרופניק - דיאטנית קלינית B.Sc
+              </p>
+              <p className="text-lg sm:text-xl text-gray-700">
+                להפסיק להתעסק באובססיביות עם אוכל, במקום זאת להתחיל להרגיש טוב עם הגוף שלך
+              </p>
+              <p className="text-lg sm:text-xl text-gray-700">
+                השיגו בריאות מיטבית עם אסטרטגיות תזונה מותאמות אישית
+              </p>
+            </motion.div>
+
+            {/* CTA Buttons */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.6, duration: 0.8 }}
+              className="flex flex-col sm:flex-row gap-4 sm:gap-6 pt-4"
+            >
+              <button 
+                className="group flex items-center justify-center gap-2 w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-teal-600 text-white text-base sm:text-lg font-medium rounded-full hover:bg-teal-700 transition-all duration-300 hover:shadow-lg"
+              >
+                <Calendar className="w-5 h-5" />
+                <span>קביעת פגישת ייעוץ</span>
+                <ArrowLeftCircle className="w-5 h-5 opacity-0 group-hover:opacity-100 transition-all duration-300 -translate-x-4 group-hover:translate-x-0" />
+              </button>
+              <button 
+                className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-white text-teal-600 text-base sm:text-lg font-medium rounded-full border-2 border-teal-600 hover:bg-teal-50 transition-all duration-300"
+              >
+                למידע נוסף
+              </button>
+            </motion.div>
+          </motion.div>
+
+          {/* Image Side */}
+          <motion.div 
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+            className="relative order-first lg:order-last"
+          >
+            <div className="relative h-full min-h-[400px] lg:min-h-[600px] overflow-hidden rounded-3xl">
+              {/* Background gradient for image enhancement */}
+              <div className="absolute inset-0 bg-gradient-to-b from-teal-50/50 to-transparent"></div>
+              
+              {/* Main Image */}
+              <Image
+                src={yafitImage}
+                alt="יפית קרופניק - דיאטנית קלינית" 
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>
-
-  )
+  );
 };
+
 export default Hero;
-
-
-{/* <section className="bg-orange-50 py-24 mt-24">
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-    <div className="relative order-1 lg:order-1">
-      <Image
-        src="https://prayagtandon.github.io/Omnifood-Project/Hero-section/img/hero.png"
-        alt="אישה נהנית מאוכל, ארוחות במיכלי אחסון וקערות אוכל על שולחן"
-        width={600}
-        height={600}
-        className="w-full h-auto"
-      />
-    </div>
-    <div className="space-y-8 order-2 lg:order-2 text-right">
-      <h1 className="text-5xl font-bold text-gray-900 leading-tight">
-לעשות שינוי בגוף 
-      </h1>
-      <p className="text-xl text-gray-600 leading-relaxed">
-      להפסיק להתעסק באובססיביות לגבי אוכל במקום להתחיל תרגיש טוב לגוף שלך. להתחיל לחיות אורח חיים בריא ומאוזן
-      </p>
-      <div className="space-x-4">
-        <a href="#" className="inline-block px-8 py-4 bg-orange-500 text-white font-semibold rounded-full hover:bg-orange-600 transition duration-300 mr-4">
-          התחל לאכול בריא
-        </a>
-        <a href="#" className="inline-block px-8 py-4 bg-white text-gray-700 font-semibold rounded-full hover:bg-gray-100 transition duration-300 border-2 border-gray-200">
-          למידע נוסף ↓
-        </a>
-      </div>
-    </div>
-  
-  </div>
-</section> */}
